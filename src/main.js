@@ -3,14 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 const router = new VueRouter({
   mode: 'history',
   routes: [{
     path: '/',
-    component: require('./components/Hello.vue')
+    component: require('./components/Home.vue')
   }, {
     path: '*',
     redirect: '/'
