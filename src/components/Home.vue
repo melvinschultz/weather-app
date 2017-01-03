@@ -7,26 +7,24 @@
       </div>
       <button class="ui blue button" @click.prevent="getWeatherByCityName">Rechercher</button>
     </form>
-    <div class="ui cards" v-if="data">
-      <div class="card">
-        <div class="content">
-          <!--<img class="right floated mini ui image" src="/images/avatar/large/jenny.jpg">-->
-          <div class="header">
-            {{ data.name }}
-          </div>
-          <div class="meta">
-            {{ data.sys.country }}
-          </div>
-          <div class="description">
-            <!--{{ data.weather[0].description }}-->
-          </div>
+
+    <div class="ui card" v-if="data">
+      <div class="content">
+        <!--{{ weatherIcon }}-->
+        <!--<img class="right floated mini ui image" src="/images/avatar/large/jenny.jpg">-->
+        <div class="header">
+          {{ data.name }}
         </div>
-        <div class="extra content">
-          <div class="ui two buttons">
-            <div class="ui basic green button">{{ data.main.temp_min }} °C</div>
-            <div class="ui basic red button">{{ data.main.temp_max }} °C</div>
-          </div>
+        <div class="meta">
+          {{ data.sys.country }} <i class="flag" :class="data.sys.country|lowercase"></i>
         </div>
+        <div class="description">
+          {{ data.weather[0].description }}
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui green message">Min T : <strong>{{ data.main.temp_min }} °C</strong></div>
+        <div class="ui red message">Max T : <strong>{{ data.main.temp_max }} °C</strong></div>
       </div>
     </div>
 
@@ -37,7 +35,7 @@
       </div>
     </div>
 
-    <pre>{{ data }}</pre>
+    <!--<pre>{{ data }}</pre>-->
     <!--<pre>{{ error }}</pre>-->
   </div>
 </template>
@@ -49,13 +47,14 @@ export default {
     return {
       data: '',
       citySearched: '',
-      error: ''
+      error: '',
+      weatherIcon: ''
     }
   },
   methods: {
     getWeatherByCityName () {
       // GET weather with city name
-      this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.citySearched + '&units=metric&APPID=96721a29bd0911ed5b1120957b462d69')
+      this.$http.get(`http://api.openweathermap.org/data/2.5/weather?q="${this.citySearched}"&units=metric&APPID=96721a29bd0911ed5b1120957b462d69`)
       .then((response) => {
         // success callback
         console.log('success callback')
@@ -66,6 +65,8 @@ export default {
         }
 
         this.data = response.body
+
+        // this.weatherIcon = <img src="http://openweathermap.org/img/w/' + response.body.weather[0].icon + '.png">
       }, (error) => {
         // error callback
         console.log('error callback')
@@ -94,5 +95,12 @@ export default {
 }
 .field {
   width: 100%;
+}
+.negative .message {
+  width: 50%;
+  margin: 15px auto;
+}
+.card {
+  margin: 15px auto;
 }
 </style>

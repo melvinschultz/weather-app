@@ -8,6 +8,10 @@ import VueResource from 'vue-resource'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
+Vue.filter('lowercase', function (value) {
+  return value.toLowerCase()
+})
+
 const router = new VueRouter({
   mode: 'history',
   routes: [{
