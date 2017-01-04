@@ -10,8 +10,6 @@
 
     <div class="ui card" v-if="data">
       <div class="content">
-        <!--{{ weatherIcon }}-->
-        <!--<img class="right floated mini ui image" src="/images/avatar/large/jenny.jpg">-->
         <div class="header">
           {{ data.name }}
         </div>
@@ -53,7 +51,7 @@ export default {
   },
   methods: {
     getWeatherByCityName () {
-      // GET weather with city name
+      // GET weather with city by name
       this.$http.get(`http://api.openweathermap.org/data/2.5/weather?q="${this.citySearched}"&units=metric&APPID=96721a29bd0911ed5b1120957b462d69`)
       .then((response) => {
         // success callback
@@ -85,13 +83,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#app .h1 {
-  margin: 0 auto;
-  text-align: center;
+.home {
+  height: inherit;
 }
 .form {
   width: 50%;
   margin: 0 auto;
+  padding-top: 100px;
 }
 .field {
   width: 100%;
@@ -102,5 +100,6 @@ export default {
 }
 .card {
   margin: 15px auto;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 </style>

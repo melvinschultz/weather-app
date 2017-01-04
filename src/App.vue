@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--<h1><i class="cloud icon"></i></h1>-->
     <home></home>
   </div>
 </template>
@@ -22,7 +21,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  padding-top: 100px;
+  height: inherit;
 }
 #app .h1 {
   margin: 0 auto;
