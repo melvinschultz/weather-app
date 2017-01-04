@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :style="{ 'backgroundImage': backgroundImage }">
     <form class="ui form">
       <div class="field">
         <label>City name</label>
@@ -19,7 +19,7 @@
           {{ data.sys.country }} <i class="flag" :class="data.sys.country|lowercase"></i>
         </div>
         <div class="description">
-          {{ data.weather[0].description }}
+          {{ data.weather[0].main }}
         </div>
       </div>
       <div class="extra content">
@@ -48,7 +48,7 @@ export default {
       data: '',
       citySearched: '',
       error: '',
-      weatherIcon: ''
+      backgroundImage: ''
     }
   },
   methods: {
@@ -65,8 +65,7 @@ export default {
         }
 
         this.data = response.body
-
-        // this.weatherIcon = <img src="http://openweathermap.org/img/w/' + response.body.weather[0].icon + '.png">
+        this.backgroundImage = 'url("static/images/' + this.data.weather[0].main.toLowerCase() + '.jpg")'
       }, (error) => {
         // error callback
         console.log('error callback')
@@ -74,6 +73,7 @@ export default {
         // if data has old data, clear data
         if (this.data) {
           this.data = ''
+          this.backgroundImage = ''
         }
 
         this.error = error.body
